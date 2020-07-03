@@ -3,6 +3,7 @@ package me.index197511.mysongbank.db.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import me.index197511.mysongbank.model.Song
 
 @Entity(tableName = "songs")
 data class SongEntity(
@@ -20,4 +21,10 @@ data class SongEntity(
 
     @ColumnInfo(name = "memo")
     val memo: String
-)
+) {
+    fun toModel(): Song =
+        Song(id, name, singer, key, memo)
+}
+
+fun Song.toEntity(): SongEntity =
+    SongEntity(id, name, singer, key, memo)
