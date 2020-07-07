@@ -1,6 +1,8 @@
 package me.index197511.mysongbank.ui.songlist.songlistitem
 
 import android.view.View
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.viewbinding.BindableItem
@@ -21,6 +23,7 @@ class SongListItemHeader(private val song: Song) : BindableItem<SongListItemHead
 
         viewBinding.songListItemRoot.setOnClickListener {
             expandableGroup.onToggleExpanded()
+            rotateArrow(viewBinding.imageIsExpandArrow)
         }
     }
 
@@ -30,4 +33,17 @@ class SongListItemHeader(private val song: Song) : BindableItem<SongListItemHead
     override fun setExpandableGroup(onToggleListener: ExpandableGroup) {
         expandableGroup = onToggleListener
     }
+
+    private fun rotateArrow(arrowImage: ImageView) {
+        val rotate = if (expandableGroup.isExpanded) {
+            RotateAnimation(0F, 180F, arrowImage.pivotX, arrowImage.pivotY)
+        } else {
+            RotateAnimation(180F, 0F, arrowImage.pivotX, arrowImage.pivotY)
+        }.apply {
+            duration = 100
+            fillAfter = true
+        }
+        arrowImage.startAnimation(rotate)
+    }
+
 }
