@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MySongBank</string>
+    <string name="text_image_is_expand">is_expand</string>
 </resources>
