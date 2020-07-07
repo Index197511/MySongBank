@@ -10,7 +10,6 @@ class SongListItem(private val song: Song) : BindableItem<SongListItemBinding>()
     override fun getLayout(): Int =
         R.layout.song_list_item
 
-
     override fun bind(viewBinding: SongListItemBinding, position: Int) {
         viewBinding.songTitle.text = song.name
         viewBinding.singer.text = song.singer
