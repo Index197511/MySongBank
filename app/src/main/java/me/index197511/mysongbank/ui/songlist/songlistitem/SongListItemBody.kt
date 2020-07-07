@@ -10,7 +10,7 @@ class SongListItemBody(private val song: Song) : BindableItem<SongListItemBodyBi
     override fun getLayout(): Int = R.layout.song_list_item_body
 
     override fun bind(viewBinding: SongListItemBodyBinding, position: Int) {
-        viewBinding.songsKey.text = song.key.toString()
+        viewBinding.songsKey.text = "Key: ${song.key}"
         viewBinding.songsMemo.text = song.memo
     }
 
