@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
-import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItem
+import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemBody
+import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SongListFragment : Fragment() {
@@ -42,9 +44,11 @@ class SongListFragment : Fragment() {
     }
 
     private fun updateSongList(songList: List<Song>) {
-        adapter.update(mutableListOf<Group>().apply {
+        adapter.update(mutableListOf<ExpandableGroup>().apply {
             songList.forEach { song ->
-                add(SongListItem(song))
+                add(ExpandableGroup(SongListItemHeader(song), false).apply {
+                    add(SongListItemBody(song))
+                })
             }
         })
     }
