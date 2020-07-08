@@ -51,14 +51,15 @@ class SongListFragment : Fragment() {
     private fun showInsertNewSongDialog() {
         context?.let { context ->
             MaterialDialog(context, BottomSheet()).show {
+                title(R.string.text_dialog_title)
                 customView(R.layout.insert_new_song_dialog)
                 positiveButton {
-                    val title = it.edit_text_title.text.toString()
+                    val name = it.edit_text_name.text.toString()
                     val singer = it.edit_text_singer.text.toString()
                     val key = it.edit_text_key.text.toString().toIntOrNull() ?: 0
                     val memo = it.edit_text_memo.text.toString()
                     val newSong =
-                        Song(id = 0, name = title, singer = singer, key = key, memo = memo)
+                        Song(id = 0, name = name, singer = singer, key = key, memo = memo)
                     Log.i("DebugPrint", "$newSong")
                     viewModel.insertSong(newSong)
                 }
@@ -66,6 +67,7 @@ class SongListFragment : Fragment() {
             }
         }
     }
+
 
     private fun updateSongList(songList: List<Song>) {
         adapter.update(mutableListOf<ExpandableGroup>().apply {
