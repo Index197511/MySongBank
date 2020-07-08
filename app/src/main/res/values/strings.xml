@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MySongBank</string>
     <string name="text_image_is_expand">is_expand</string>
+    <string name="edit_text_song_name_hint">Song\'s Name</string>
+    <string name="edit_text_singer_hint">Singer</string>
+    <string name="edit_text_key_hint">Song\'s Key</string>
+    <string name="edit_text_memo_hint">Song\'s Memo</string>
+    <string name="text_dialog_title">NewSong</string>
 </resources>
