@@ -37,9 +37,9 @@ class SongListViewModel : ViewModel(), KoinComponent {
     }
 
     // For insert Test
-    fun insertSong() {
+    fun insertSong(song: Song) {
         viewModelScope.launch {
-            repository.add(Song(0, "title", "singer", 0, "memo"))
+            repository.add(song)
         }
         setAllSongs()
     }
