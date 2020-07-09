@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/secondaryDark</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="md_background_color">@color/secondaryDark</item>
+        <item name="md_color_button_text">@color/primaryText</item>
+        <item name="md_color_title">@color/primaryText</item>
     </style>
-
 </resources>

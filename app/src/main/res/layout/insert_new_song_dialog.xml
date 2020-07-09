@@ -51,7 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:hint="@string/edit_text_memo_hint"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
