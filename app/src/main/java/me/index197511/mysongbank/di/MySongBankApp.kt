@@ -14,6 +14,7 @@ import org.koin.dsl.module
 class MySongBankApp : Application() {
 
     private val module = module {
+
         viewModel { SongListViewModel() }
 
         single { SongRepository() }
