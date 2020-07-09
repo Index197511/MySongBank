@@ -10,14 +10,13 @@ import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
-import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.insert_new_song_dialog.*
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
-import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemBody
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -70,11 +69,9 @@ class SongListFragment : Fragment() {
 
 
     private fun updateSongList(songList: List<Song>) {
-        adapter.update(mutableListOf<ExpandableGroup>().apply {
+        adapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
-                add(ExpandableGroup(SongListItemHeader(song), false).apply {
-                    add(SongListItemBody(song))
-                })
+                add(SongListItemHeader(context!!, song))
             }
         })
     }

@@ -20,6 +20,7 @@
             android:layout_height="45dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textColor="@color/primaryText"
             android:textSize="32sp"
             app:layout_constraintBottom_toTopOf="@+id/singer"
@@ -35,6 +36,7 @@
             android:layout_height="45dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textColor="@color/secondaryTextIcon"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,12 +44,13 @@
             app:layout_constraintHorizontal_bias="0.017"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/image_is_expand_arrow"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/text_image_is_expand"
-            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+            android:backgroundTint="@color/thirdDark"
+            android:contentDescription="@string/text_edit_button"
+            android:src="@drawable/ic_baseline_edit_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.722"
