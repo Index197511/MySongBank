@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
@@ -14,11 +15,18 @@ import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.insert_new_song_dialog.*
+import kotlinx.android.synthetic.main.song_list_item_body.*
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
 import org.koin.android.viewmodel.ext.android.viewModel
+
+interface OnClickHandler {
+    fun onRootClick()
+    fun onEditClick()
+    fun onItemLongClick()
+}
 
 class SongListFragment : Fragment() {
 
@@ -37,6 +45,7 @@ class SongListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.recyclerViewSongList.adapter = adapter
+
 
         binding.buttonAddNewSong.setOnClickListener {
             showInsertNewSongDialog()
@@ -71,7 +80,42 @@ class SongListFragment : Fragment() {
     private fun updateSongList(songList: List<Song>) {
         adapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
-                add(SongListItemHeader(context!!, song))
+
+                val handler = object : OnClickHandler {
+                    override fun onRootClick() {
+                        MaterialDialog(context!!, BottomSheet()).show {
+                            title(R.string.text_dialog_title)
+                            customView(R.layout.song_list_item_body)
+                            this.text_view_name.text = song.name
+                            this.text_view_singer.text = song.singer
+                            this.text_view_key.text =
+                                if (song.key <= 0) song.key.toString() else "+${song.key}"
+                            this.text_view_memo.text = song.memo
+                        }
+                    }
+
+                    override fun onEditClick() {
+                        val action =
+                            SongListFragmentDirections.actionSongListFragmentToEditSongFragment(song)
+                        findNavController().navigate(action)
+                    }
+
+                    override fun onItemLongClick() {
+                        MaterialDialog(context!!).show {
+                            title(R.string.text_delete_dialog_message)
+                            customView(R.layout.delete_song_dialog)
+                            this.text_view_name.text = song.name
+                            this.text_view_singer.text = song.singer
+
+                            positiveButton {
+                                viewModel.removeSong(song)
+                            }
+                            negativeButton()
+                        }
+                    }
+                }
+
+                add(SongListItemHeader(handler, song))
             }
         })
     }

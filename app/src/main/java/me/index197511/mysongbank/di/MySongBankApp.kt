@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import me.index197511.mysongbank.data.SongRepository
 import me.index197511.mysongbank.db.MySongBankDatabase
+import me.index197511.mysongbank.ui.editsong.EditSongViewModel
 import me.index197511.mysongbank.ui.songlist.SongListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -16,6 +17,7 @@ class MySongBankApp : Application() {
     private val module = module {
 
         viewModel { SongListViewModel() }
+        viewModel { EditSongViewModel() }
 
         single { SongRepository() }
 

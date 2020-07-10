@@ -27,11 +27,9 @@ class SongListViewModel : ViewModel(), KoinComponent {
         setAllSongs()
     }
 
-    fun removeSong(position: Int) {
+    fun removeSong(song: Song) {
         viewModelScope.launch {
-            _songs.value?.get(position)?.let {
-                repository.remove(it)
-            }
+            repository.remove(song)
             setAllSongs()
         }
     }

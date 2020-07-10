@@ -11,6 +11,9 @@ interface MySongDatabaseDao {
     @Delete
     suspend fun deleteSong(song: SongEntity)
 
+    @Update
+    suspend fun update(song: SongEntity)
+
     @Query("SELECT * FROM songs ORDER BY id DESC")
     suspend fun getAllSong(): List<SongEntity>
 }
