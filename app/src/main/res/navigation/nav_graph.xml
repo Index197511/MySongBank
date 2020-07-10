@@ -9,5 +9,22 @@
         android:id="@+id/songListFragment"
         android:name="me.index197511.mysongbank.ui.songlist.SongListFragment"
         android:label="song_list_fragment"
-        tools:layout="@layout/song_list_fragment" />
+        tools:layout="@layout/song_list_fragment">
+        <action
+            android:id="@+id/action_songListFragment_to_editSongFragment"
+            app:destination="@id/editSongFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSongFragment"
+        android:name="me.index197511.mysongbank.ui.editsong.EditSongFragment"
+        android:label="edit_song_fragment"
+        tools:layout="@layout/edit_song_fragment">
+
+        <argument
+            android:name="song"
+            app:argType="me.index197511.mysongbank.model.Song" />
+        <action
+            android:id="@+id/action_editSongFragment_to_songListFragment"
+            app:destination="@id/songListFragment" />
+    </fragment>
 </navigation>

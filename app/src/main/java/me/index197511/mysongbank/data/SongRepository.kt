@@ -12,6 +12,7 @@ interface SongRepositoryInterface {
     suspend fun add(song: Song)
     suspend fun remove(song: Song)
     suspend fun loadAll(): List<Song>
+    suspend fun update(song: Song)
 }
 
 class SongRepository : SongRepositoryInterface, KoinComponent {
@@ -32,6 +33,12 @@ class SongRepository : SongRepositoryInterface, KoinComponent {
     override suspend fun loadAll(): List<Song> {
         return withContext(Dispatchers.IO) {
             songDao.getAllSong().map { e -> e.toModel() }
+        }
+    }
+
+    override suspend fun update(song: Song) {
+        withContext(Dispatchers.IO) {
+            songDao.update(song.toEntity())
         }
     }
 }
