@@ -9,4 +9,8 @@
     <string name="text_dialog_title">NewSong</string>
     <string name="text_delete_dialog_message">Delete this song?</string>
     <string name="text_save_button">Save</string>
+    <string name="text_close">close</string>
+    <string name="text_add">add</string>
+    <string name="text_delete">delete</string>
+    <string name="text_cancel">cancel</string>
 </resources>

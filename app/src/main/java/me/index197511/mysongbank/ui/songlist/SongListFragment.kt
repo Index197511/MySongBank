@@ -61,7 +61,7 @@ class SongListFragment : Fragment() {
             MaterialDialog(context, BottomSheet()).show {
                 title(R.string.text_dialog_title)
                 customView(R.layout.insert_new_song_dialog)
-                positiveButton {
+                positiveButton(R.string.text_add) {
                     val name = it.edit_text_name.text.toString()
                     val singer = it.edit_text_singer.text.toString()
                     val key = it.edit_text_key.text.toString().toIntOrNull() ?: 0
@@ -71,7 +71,7 @@ class SongListFragment : Fragment() {
                     Log.i("DebugPrint", "$newSong")
                     viewModel.insertSong(newSong)
                 }
-                negativeButton()
+                negativeButton(R.string.text_cancel)
             }
         }
     }
@@ -91,7 +91,7 @@ class SongListFragment : Fragment() {
                             this.text_view_key.text =
                                 if (song.key <= 0) song.key.toString() else "+${song.key}"
                             this.text_view_memo.text = song.memo
-                            negativeButton()
+                            negativeButton(R.string.text_close)
                         }
                     }
 
@@ -108,10 +108,10 @@ class SongListFragment : Fragment() {
                             this.text_view_name.text = song.name
                             this.text_view_singer.text = song.singer
 
-                            positiveButton {
+                            positiveButton(R.string.text_delete) {
                                 viewModel.removeSong(song)
                             }
-                            negativeButton()
+                            negativeButton(R.string.text_cancel)
                         }
                     }
                 }
