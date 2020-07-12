@@ -51,6 +51,8 @@ dependencies {
     implementation "junit:junit:4.12"
     implementation "com.google.truth:truth:1.0.1"
     implementation "androidx.test.ext:truth:1.2.0"
+    implementation "androidx.test.espresso:espresso-core:3.2.0"
+    implementation "androidx.test.espresso:espresso-contrib:3.2.0"
 
     // room
     kapt 'androidx.room:room-compiler:2.2.5'

@@ -91,6 +91,7 @@ class SongListFragment : Fragment() {
                             this.text_view_key.text =
                                 if (song.key <= 0) song.key.toString() else "+${song.key}"
                             this.text_view_memo.text = song.memo
+                            negativeButton()
                         }
                     }
 
