@@ -32,7 +32,6 @@ android {
     androidExtensions {
         experimental = true
     }
-
 }
 
 dependencies {
@@ -44,9 +43,14 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // test
+    implementation "androidx.test:runner:1.2.0"
+    implementation "androidx.test:rules:1.2.0"
+    implementation "androidx.test:core:1.2.0"
+    implementation "junit:junit:4.12"
+    implementation "com.google.truth:truth:1.0.1"
+    implementation "androidx.test.ext:truth:1.2.0"
 
     // room
     kapt 'androidx.room:room-compiler:2.2.5'
