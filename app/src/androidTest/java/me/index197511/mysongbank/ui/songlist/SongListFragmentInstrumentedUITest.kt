@@ -125,7 +125,7 @@ class SongListFragmentInstrumentedUITest {
 
         val dialogActionButton = onView(
             allOf(
-                withId(R.id.md_button_positive), withText("OK"),
+                withId(R.id.md_button_positive), withText("ADD"),
                 childAtPosition(
                     allOf(
                         withId(R.id.md_button_layout),
@@ -237,7 +237,7 @@ class SongListFragmentInstrumentedUITest {
 
         val dialogActionButton2 = onView(
             allOf(
-                withId(R.id.md_button_positive), withText("OK"),
+                withId(R.id.md_button_positive), withText("ADD"),
                 childAtPosition(
                     allOf(
                         withId(R.id.md_button_layout),
@@ -270,7 +270,7 @@ class SongListFragmentInstrumentedUITest {
 
         val dialogActionButton3 = onView(
             allOf(
-                withId(R.id.md_button_negative), withText("Cancel"),
+                withId(R.id.md_button_negative), withText("CLOSE"),
                 childAtPosition(
                     allOf(
                         withId(R.id.md_button_layout),
@@ -304,7 +304,7 @@ class SongListFragmentInstrumentedUITest {
 
         val dialogActionButton4 = onView(
             allOf(
-                withId(R.id.md_button_negative), withText("Cancel"),
+                withId(R.id.md_button_negative), withText("CLOSE"),
                 childAtPosition(
                     allOf(
                         withId(R.id.md_button_layout),
@@ -337,7 +337,7 @@ class SongListFragmentInstrumentedUITest {
 
         val dialogActionButton5 = onView(
             allOf(
-                withId(R.id.md_button_negative), withText("Cancel"),
+                withId(R.id.md_button_negative), withText("CANCEL"),
                 childAtPosition(
                     allOf(
                         withId(R.id.md_button_layout),
@@ -370,7 +370,7 @@ class SongListFragmentInstrumentedUITest {
 
         val dialogActionButton6 = onView(
             allOf(
-                withId(R.id.md_button_positive), withText("OK"),
+                withId(R.id.md_button_positive), withText("DELETE"),
                 childAtPosition(
                     allOf(
                         withId(R.id.md_button_layout),
@@ -403,7 +403,7 @@ class SongListFragmentInstrumentedUITest {
 
         val dialogActionButton7 = onView(
             allOf(
-                withId(R.id.md_button_positive), withText("OK"),
+                withId(R.id.md_button_positive), withText("DELETE"),
                 childAtPosition(
                     allOf(
                         withId(R.id.md_button_layout),
