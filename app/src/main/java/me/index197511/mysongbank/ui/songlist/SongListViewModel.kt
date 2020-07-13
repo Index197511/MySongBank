@@ -23,10 +23,6 @@ class SongListViewModel : ViewModel(), KoinComponent {
         setAllSongs()
     }
 
-    fun updateSongList() {
-        setAllSongs()
-    }
-
     fun removeSong(song: Song) {
         viewModelScope.launch {
             repository.remove(song)
@@ -34,7 +30,6 @@ class SongListViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    // For insert Test
     fun insertSong(song: Song) {
         viewModelScope.launch {
             repository.add(song)

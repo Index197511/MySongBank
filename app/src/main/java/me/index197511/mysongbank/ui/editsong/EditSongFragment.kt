@@ -27,21 +27,25 @@ class EditSongFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        binding.editTextName.setText(args.song.name)
-        binding.editTextSinger.setText(args.song.singer)
-        binding.editTextKey.setText(args.song.key.toString())
-        binding.editTextMemo.setText(args.song.memo)
+        binding.apply {
+            editTextName.setText(args.song.name)
+            editTextSinger.setText(args.song.singer)
+            editTextKey.setText(args.song.key.toString())
+            editTextMemo.setText(args.song.memo)
+        }
 
-        binding.buttonSave.setOnClickListener {
-            val id = args.song.id
-            val name = binding.editTextName.text.toString()
-            val singer = binding.editTextSinger.text.toString()
-            val key = binding.editTextKey.text.toString().toIntOrNull() ?: 0
-            val memo = binding.editTextMemo.text.toString()
-            val updatedSong =
-                Song(id = id, name = name, singer = singer, key = key, memo = memo)
-            viewModel.updateSong(updatedSong)
-            findNavController().navigate(R.id.action_editSongFragment_to_songListFragment)
+        binding.apply {
+            buttonSave.setOnClickListener {
+                val id = args.song.id
+                val name = editTextName.text.toString()
+                val singer = editTextSinger.text.toString()
+                val key = editTextKey.text.toString().toIntOrNull() ?: 0
+                val memo = editTextMemo.text.toString()
+                val updatedSong =
+                    Song(id = id, name = name, singer = singer, key = key, memo = memo)
+                viewModel.updateSong(updatedSong)
+                findNavController().navigate(R.id.action_editSongFragment_to_songListFragment)
+            }
         }
         super.onActivityCreated(savedInstanceState)
     }

@@ -1,7 +1,6 @@
 package me.index197511.mysongbank.ui.songlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +45,6 @@ class SongListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         binding.recyclerViewSongList.adapter = adapter
 
-
         binding.buttonAddNewSong.setOnClickListener {
             showInsertNewSongDialog()
         }
@@ -68,7 +66,6 @@ class SongListFragment : Fragment() {
                     val memo = it.edit_text_memo.text.toString()
                     val newSong =
                         Song(id = 0, name = name, singer = singer, key = key, memo = memo)
-                    Log.i("DebugPrint", "$newSong")
                     viewModel.insertSong(newSong)
                 }
                 negativeButton(R.string.text_cancel)
@@ -80,18 +77,19 @@ class SongListFragment : Fragment() {
     private fun updateSongList(songList: List<Song>) {
         adapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
-
                 val handler = object : OnClickHandler {
                     override fun onRootClick() {
-                        MaterialDialog(context!!, BottomSheet()).show {
-                            title(R.string.text_dialog_title)
-                            customView(R.layout.song_list_item_body)
-                            this.text_view_name.text = song.name
-                            this.text_view_singer.text = song.singer
-                            this.text_view_key.text =
-                                if (song.key <= 0) song.key.toString() else "+${song.key}"
-                            this.text_view_memo.text = song.memo
-                            negativeButton(R.string.text_close)
+                        context?.let {
+                            MaterialDialog(it, BottomSheet()).show {
+                                title(R.string.text_dialog_title)
+                                customView(R.layout.song_list_item_body)
+                                this.text_view_name.text = song.name
+                                this.text_view_singer.text = song.singer
+                                this.text_view_key.text =
+                                    if (song.key <= 0) "${song.key}" else "+${song.key}"
+                                this.text_view_memo.text = song.memo
+                                negativeButton(R.string.text_close)
+                            }
                         }
                     }
 
@@ -102,20 +100,21 @@ class SongListFragment : Fragment() {
                     }
 
                     override fun onItemLongClick() {
-                        MaterialDialog(context!!).show {
-                            title(R.string.text_delete_dialog_message)
-                            customView(R.layout.delete_song_dialog)
-                            this.text_view_name.text = song.name
-                            this.text_view_singer.text = song.singer
+                        context?.let {
+                            MaterialDialog(it).show {
+                                title(R.string.text_delete_dialog_message)
+                                customView(R.layout.delete_song_dialog)
+                                this.text_view_name.text = song.name
+                                this.text_view_singer.text = song.singer
 
-                            positiveButton(R.string.text_delete) {
-                                viewModel.removeSong(song)
+                                positiveButton(R.string.text_delete) {
+                                    viewModel.removeSong(song)
+                                }
+                                negativeButton(R.string.text_cancel)
                             }
-                            negativeButton(R.string.text_cancel)
                         }
                     }
                 }
-
                 add(SongListItemHeader(handler, song))
             }
         })

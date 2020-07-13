@@ -19,21 +19,25 @@ class SongListItemHeader(
         R.layout.song_list_item_header
 
     override fun bind(viewBinding: SongListItemHeaderBinding, position: Int) {
-        viewBinding.songTitle.text = song.name
-        viewBinding.singer.text = song.singer
-
-        viewBinding.songListItemRoot.setOnClickListener {
-            listener.onRootClick()
-        }
-        viewBinding.buttonEdit.setOnClickListener {
-            listener.onEditClick()
+        viewBinding.apply {
+            songTitle.text = song.name
+            singer.text = song.singer
         }
 
-        viewBinding.songListItemRoot.setOnLongClickListener {
-            listener.onItemLongClick()
-            true
-        }
+        viewBinding.apply {
+            songListItemRoot.setOnClickListener {
+                listener.onRootClick()
+            }
 
+            songListItemRoot.setOnLongClickListener {
+                listener.onItemLongClick()
+                true
+            }
+
+            buttonEdit.setOnClickListener {
+                listener.onEditClick()
+            }
+        }
     }
 
     override fun initializeViewBinding(view: View): SongListItemHeaderBinding =
