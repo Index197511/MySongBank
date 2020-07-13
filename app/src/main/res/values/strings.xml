@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MySongBank</string>
+    <string name="text_detail_dialog_title">Song\'s Detail</string>
+    <string name="text_edit_button">edit</string>
+    <string name="text_song_name">Song\'s Name</string>
+    <string name="text_singer">Singer</string>
+    <string name="text_key">Song\'s Key</string>
+    <string name="text_memo">Song\'s Memo</string>
+    <string name="text_dialog_title">NewSong</string>
+    <string name="text_delete_dialog_message">Delete this song?</string>
+    <string name="text_save_button">Save</string>
+    <string name="text_close">close</string>
+    <string name="text_add">add</string>
+    <string name="text_delete">delete</string>
+    <string name="text_cancel">cancel</string>
 </resources>
