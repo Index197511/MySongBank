@@ -1,6 +1,7 @@
 package me.index197511.mysongbank.db.dao
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import me.index197511.mysongbank.db.entity.SongEntity
 
 @Dao
@@ -15,5 +16,5 @@ interface MySongDatabaseDao {
     suspend fun update(song: SongEntity)
 
     @Query("SELECT * FROM songs ORDER BY id DESC")
-    suspend fun getAllSong(): List<SongEntity>
+    fun getAllSong(): Flow<List<SongEntity>>
 }
