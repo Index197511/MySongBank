@@ -1,6 +1,8 @@
 package me.index197511.mysongbank.data
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import me.index197511.mysongbank.db.dao.MySongDatabaseDao
 import me.index197511.mysongbank.db.entity.toEntity
@@ -11,7 +13,7 @@ import org.koin.core.inject
 interface SongRepositoryInterface {
     suspend fun add(song: Song)
     suspend fun remove(song: Song)
-    suspend fun loadAll(): List<Song>
+    fun loadAll(): Flow<List<Song>>
     suspend fun update(song: Song)
 }
 
@@ -30,10 +32,9 @@ class SongRepository : SongRepositoryInterface, KoinComponent {
         }
     }
 
-    override suspend fun loadAll(): List<Song> {
-        return withContext(Dispatchers.IO) {
-            songDao.getAllSong().map { e -> e.toModel() }
-        }
+    override fun loadAll(): Flow<List<Song>> {
+        return songDao.getAllSong()
+            .map { songs -> songs.map { songEntity -> songEntity.toModel() } }
     }
 
     override suspend fun update(song: Song) {
