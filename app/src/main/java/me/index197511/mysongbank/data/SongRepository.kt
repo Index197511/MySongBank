@@ -7,8 +7,7 @@ import kotlinx.coroutines.withContext
 import me.index197511.mysongbank.db.dao.MySongDatabaseDao
 import me.index197511.mysongbank.db.entity.toEntity
 import me.index197511.mysongbank.model.Song
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import javax.inject.Inject
 
 interface SongRepositoryInterface {
     suspend fun add(song: Song)
@@ -17,8 +16,8 @@ interface SongRepositoryInterface {
     suspend fun update(song: Song)
 }
 
-class SongRepository : SongRepositoryInterface, KoinComponent {
-    private val songDao by inject<MySongDatabaseDao>()
+class SongRepository @Inject constructor(private val songDao: MySongDatabaseDao) :
+    SongRepositoryInterface {
 
     override suspend fun add(song: Song) {
         withContext(Dispatchers.IO) {

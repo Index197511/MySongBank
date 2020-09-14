@@ -1,5 +1,6 @@
 package me.index197511.mysongbank.ui.songlist
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -9,11 +10,10 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import me.index197511.mysongbank.data.SongRepository
 import me.index197511.mysongbank.model.Song
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class SongListViewModel : ViewModel(), KoinComponent {
-    private val repository by inject<SongRepository>()
+class SongListViewModel @ViewModelInject constructor(
+    private val repository: SongRepository
+) : ViewModel() {
     @ExperimentalCoroutinesApi
     val songs: LiveData<List<Song>> = repository.loadAll().distinctUntilChanged().asLiveData()
 
