@@ -1,6 +1,5 @@
 package me.index197511.mysongbank.ui.songlist
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
