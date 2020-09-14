@@ -14,6 +14,7 @@
     <string name="text_delete">delete</string>
     <string name="text_cancel">cancel</string>
     <string name="sorted_by">SORTED BY</string>
+    <string name="option">OPTION</string>
 
     <string-array name="sort_option">
         <item>ID</item>

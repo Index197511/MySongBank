@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
+import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -33,7 +34,8 @@ class SongListFragment : Fragment() {
 
     private val viewModel by viewModels<SongListViewModel>()
     private lateinit var binding: SongListFragmentBinding
-    private val adapter = GroupAdapter<GroupieViewHolder>()
+    private val songListAdapter = GroupAdapter<GroupieViewHolder>()
+    private val songOptionAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,19 +47,20 @@ class SongListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerViewSongList.adapter = adapter
+        binding.recyclerViewSongList.adapter = songListAdapter
+        binding.recyclerViewSongListOption.adapter = songOptionAdapter
+        songOptionAdapter.update(mutableListOf<ExpandableGroup>().apply {
+            add(ExpandableGroup(SongListOptionHeader(), false).apply {
+                add(SongListOptionBody(object : onClickListener {
+                    override fun onClick(key: String) {
+                        viewModel.switchSortOption(key)
+                    }
+                }))
+            })
+        })
 
         binding.buttonAddNewSong.setOnClickListener {
             showInsertNewSongDialog()
-        }
-
-        binding.sortOption.apply {
-            setItems("ID", "NAME", "SINGER", "KEY")
-            setOnItemSelectedListener { _, _, _, item ->
-                item?.let {
-                    viewModel.switchSortOption(it as String)
-                }
-            }
         }
 
         viewModel.sortedSongs.observe(viewLifecycleOwner, Observer {
@@ -86,7 +89,7 @@ class SongListFragment : Fragment() {
 
 
     private fun updateSongList(songList: List<Song>) {
-        adapter.update(mutableListOf<Group>().apply {
+        songListAdapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
                 val handler = object : OnClickHandler {
                     override fun onRootClick() {
