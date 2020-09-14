@@ -21,7 +21,6 @@ import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
-import org.koin.android.viewmodel.ext.android.viewModel
 
 interface OnClickHandler {
     fun onRootClick()
@@ -44,15 +43,24 @@ class SongListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewSongList.adapter = adapter
 
         binding.buttonAddNewSong.setOnClickListener {
             showInsertNewSongDialog()
         }
 
-        viewModel.songs.observe(viewLifecycleOwner, Observer {
+        binding.sortOption.apply {
+            setItems("ID", "NAME", "SINGER", "KEY")
+            setOnItemSelectedListener { _, _, _, item ->
+                item?.let {
+                    viewModel.switchSortOption(it as String)
+                }
+            }
+        }
+
+        viewModel.sortedSongs.observe(viewLifecycleOwner, Observer {
             it?.let { updateSongList(it) }
         })
     }
