@@ -22,6 +22,9 @@ import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
+import me.index197511.mysongbank.ui.songlist.songlistoption.OnClickListener
+import me.index197511.mysongbank.ui.songlist.songlistoption.SongListOptionBody
+import me.index197511.mysongbank.ui.songlist.songlistoption.SongListOptionHeader
 
 interface OnClickHandler {
     fun onRootClick()
@@ -49,26 +52,17 @@ class SongListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewSongList.adapter = songListAdapter
         binding.recyclerViewSongListOption.adapter = songOptionAdapter
-        songOptionAdapter.update(mutableListOf<ExpandableGroup>().apply {
-            add(ExpandableGroup(SongListOptionHeader(), false).apply {
-                add(SongListOptionBody(object : onClickListener {
-                    override fun onClick(key: String) {
-                        viewModel.switchSortOption(key)
-                    }
-                }))
-            })
-        })
 
         binding.buttonAddNewSong.setOnClickListener {
-            showInsertNewSongDialog()
+            showInsertionNewSongDialog()
         }
-
+        setSongListOption()
         viewModel.sortedSongs.observe(viewLifecycleOwner, Observer {
             it?.let { updateSongList(it) }
         })
     }
 
-    private fun showInsertNewSongDialog() {
+    private fun showInsertionNewSongDialog() {
         context?.let { context ->
             MaterialDialog(context, BottomSheet()).show {
                 title(R.string.text_dialog_title)
@@ -87,6 +81,23 @@ class SongListFragment : Fragment() {
         }
     }
 
+    private fun setSongListOption() {
+        songOptionAdapter.update(mutableListOf<ExpandableGroup>().apply {
+            add(ExpandableGroup(SongListOptionHeader(), false).apply {
+                add(
+                    SongListOptionBody(
+                        "SORT BY",
+                        listOf("NAME", "SINGER", "KEY", "ID"),
+                        object :
+                            OnClickListener {
+                            override fun onClick(key: String) {
+                                viewModel.switchSortOption(key)
+                            }
+                        })
+                )
+            })
+        })
+    }
 
     private fun updateSongList(songList: List<Song>) {
         songListAdapter.update(mutableListOf<Group>().apply {
