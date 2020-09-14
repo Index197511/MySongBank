@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.EditSongFragmentBinding
 import me.index197511.mysongbank.model.Song
-import org.koin.android.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class EditSongFragment : Fragment() {
-
     private val args: EditSongFragmentArgs by navArgs()
-    private val viewModel by viewModel<EditSongViewModel>()
+    private val viewModel by viewModels<EditSongViewModel>()
     private lateinit var binding: EditSongFragmentBinding
 
     override fun onCreateView(

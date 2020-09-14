@@ -6,14 +6,13 @@ import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListItemHeaderBinding
 import me.index197511.mysongbank.model.Song
 import me.index197511.mysongbank.ui.songlist.OnClickHandler
-import org.koin.core.KoinComponent
 
 
 class SongListItemHeader(
     private val listener: OnClickHandler,
     private val song: Song
 ) :
-    BindableItem<SongListItemHeaderBinding>(), KoinComponent {
+    BindableItem<SongListItemHeaderBinding>() {
 
     override fun getLayout(): Int =
         R.layout.song_list_item_header
