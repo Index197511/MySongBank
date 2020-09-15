@@ -1,3 +1,6 @@
+plugins {
+    id "com.google.protobuf" version "0.8.12"
+}
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -110,4 +113,35 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
 
     implementation "com.github.arimorty:floatingsearchview:2.1.1"
+
+    // proto Datastore
+    implementation "androidx.datastore:datastore-core:1.0.0-alpha01"
+    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+
+    // material
+    implementation "com.google.android.material:material:1.2.1"
+
+    // mockK
+    testImplementation "io.mockk:mockk:1.10.0"
+
+    // kotlinx-coroutines-test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+
+    // for livedata test
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.10.0"
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
 }

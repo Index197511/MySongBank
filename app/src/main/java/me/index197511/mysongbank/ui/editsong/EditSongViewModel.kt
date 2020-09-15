@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import me.index197511.mysongbank.data.SongRepository
+import me.index197511.mysongbank.data.repository.SongRepository
 import me.index197511.mysongbank.model.Song
 
 class EditSongViewModel @ViewModelInject constructor(

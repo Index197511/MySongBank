@@ -3,6 +3,7 @@ package me.index197511.mysongbank.ui.songlist
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -12,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
-import com.arlib.floatingsearchview.FloatingSearchView
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -48,24 +48,32 @@ class SongListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewSongList.adapter = adapter
+
         binding.buttonAddNewSong.setOnClickListener {
             showInsertNewSongDialog()
         }
-        viewModel.allSongs.observe(viewLifecycleOwner, Observer {
+
+        viewModel.sortedSongs.observe(viewLifecycleOwner, Observer {
             it?.let { updateSongList(it) }
         })
         setUpSearchView()
     }
 
     private fun setUpSearchView() {
-        binding.floatingSearchView.setOnQueryChangeListener(object :
-            FloatingSearchView.OnQueryChangeListener {
-            override fun onSearchTextChanged(oldQuery: String?, newQuery: String?) {
-                Log.i("Index197511", "seaching... $newQuery")
-            }
-        })
-
+        binding.floatingSearchView.setOnQueryChangeListener { _, newQuery ->
+            Log.i(
+                "Index197511",
+                "searching... $newQuery"
+            )
+        }
+        binding.floatingSearchView.setOnMenuItemClickListener { item: MenuItem? ->
+            Log.i(
+                "Index197511",
+                "SELECTED!"
+            )
+        }
     }
+
 
     private fun showInsertNewSongDialog() {
         context?.let { context ->
@@ -85,6 +93,7 @@ class SongListFragment : Fragment() {
             }
         }
     }
+
 
     private fun updateSongList(songList: List<Song>) {
         adapter.update(mutableListOf<Group>().apply {
