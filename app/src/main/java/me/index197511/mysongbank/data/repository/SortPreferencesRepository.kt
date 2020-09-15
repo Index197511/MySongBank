@@ -21,11 +21,8 @@ class SortPreferencesRepository @Inject constructor(application: Application) {
 
     val sortPreferencesFlow = sortPreferencesStore.data
         .catch { e ->
-            if (e is IOException) {
-                emit(SortPreferences.getDefaultInstance())
-            } else {
-                throw e
-            }
+            if (e is IOException) emit(SortPreferences.getDefaultInstance())
+            else throw e
         }
 
     suspend fun enableSortBy(order: SortOrder) {
