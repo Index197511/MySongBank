@@ -49,10 +49,10 @@ class SongListViewModel @ViewModelInject constructor(
     fun switchSortOption(key: String) {
         viewModelScope.launch {
             when (key) {
-                "ID" -> sortPrefsRepository.enableSortByAddition()
-                "NAME" -> sortPrefsRepository.enableSortBySongsName()
-                "SINGER" -> sortPrefsRepository.enableSortBySingersName()
-                "KEY" -> sortPrefsRepository.enableSortByKey()
+                "ID" -> sortPrefsRepository.enableSortBy(SortOrder.BY_ADDITION)
+                "NAME" -> sortPrefsRepository.enableSortBy(SortOrder.BY_NAME)
+                "SINGER" -> sortPrefsRepository.enableSortBy(SortOrder.BY_SINGER)
+                "KEY" -> sortPrefsRepository.enableSortBy(SortOrder.BY_KEY)
             }
         }
     }

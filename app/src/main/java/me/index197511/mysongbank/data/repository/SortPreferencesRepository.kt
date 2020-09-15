@@ -1,7 +1,6 @@
 package me.index197511.mysongbank.data.repository
 
 import android.app.Application
-import android.util.Log
 import androidx.datastore.DataStore
 import androidx.datastore.createDataStore
 import kotlinx.coroutines.flow.catch
@@ -29,27 +28,9 @@ class SortPreferencesRepository @Inject constructor(application: Application) {
             }
         }
 
-    suspend fun enableSortBySongsName() {
+    suspend fun enableSortBy(order: SortOrder) {
         sortPreferencesStore.updateData { currentPreferences ->
-            currentPreferences.toBuilder().setSortOrder(SortOrder.BY_NAME).build()
-        }
-    }
-
-    suspend fun enableSortBySingersName() {
-        sortPreferencesStore.updateData { currentPreferences ->
-            currentPreferences.toBuilder().setSortOrder(SortOrder.BY_SINGER).build()
-        }
-    }
-
-    suspend fun enableSortByKey() {
-        sortPreferencesStore.updateData { currentPreferences ->
-            currentPreferences.toBuilder().setSortOrder(SortOrder.BY_KEY).build()
-        }
-    }
-
-    suspend fun enableSortByAddition() {
-        sortPreferencesStore.updateData { currentPreferences ->
-            currentPreferences.toBuilder().setSortOrder(SortOrder.BY_ADDITION).build()
+            currentPreferences.toBuilder().setSortOrder(order).build()
         }
     }
 }
