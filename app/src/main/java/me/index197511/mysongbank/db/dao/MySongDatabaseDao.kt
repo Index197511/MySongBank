@@ -17,4 +17,7 @@ interface MySongDatabaseDao {
 
     @Query("SELECT * FROM songs ORDER BY id DESC")
     fun getAllSong(): Flow<List<SongEntity>>
+
+    @Query("SELECT * FROM songs WHERE name LIKE '%' || :query || '%'")
+    fun getSongsWithQuery(query: String): Flow<List<SongEntity>>
 }

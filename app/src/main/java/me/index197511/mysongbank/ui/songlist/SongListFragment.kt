@@ -1,7 +1,6 @@
 package me.index197511.mysongbank.ui.songlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -13,12 +12,14 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.insert_new_song_dialog.*
 import kotlinx.android.synthetic.main.song_list_item_body.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
@@ -30,6 +31,7 @@ interface OnClickHandler {
     fun onItemLongClick()
 }
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class SongListFragment : Fragment() {
 
@@ -56,24 +58,32 @@ class SongListFragment : Fragment() {
         viewModel.sortedSongs.observe(viewLifecycleOwner, Observer {
             it?.let { updateSongList(it) }
         })
+
         setUpSearchView()
+        viewModel.filterWithQuery("")
     }
 
     private fun setUpSearchView() {
         binding.floatingSearchView.setOnQueryChangeListener { _, newQuery ->
-            Log.i(
-                "Index197511",
-                "searching... $newQuery"
-            )
+            viewModel.filterWithQuery(newQuery)
         }
         binding.floatingSearchView.setOnMenuItemClickListener { item: MenuItem? ->
-            Log.i(
-                "Index197511",
-                "SELECTED!"
-            )
+            showSortSettingDialog()
         }
     }
 
+    private fun showSortSettingDialog() {
+        context?.let { context ->
+            val sortOptions = listOf("ID", "NAME", "SINGER", "KEY")
+            MaterialDialog(context).show {
+                listItemsSingleChoice(items = sortOptions) { dialog, index, text ->
+                    viewModel.switchSortOption(sortOptions[index])
+                }
+                positiveButton(text = "APPLY")
+                negativeButton(text = "CANCEL")
+            }
+        }
+    }
 
     private fun showInsertNewSongDialog() {
         context?.let { context ->

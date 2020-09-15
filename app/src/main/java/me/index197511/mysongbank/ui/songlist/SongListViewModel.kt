@@ -4,9 +4,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import me.index197511.mysongbank.SortOrder
 import me.index197511.mysongbank.SortPreferences
@@ -14,14 +17,20 @@ import me.index197511.mysongbank.data.repository.SongRepository
 import me.index197511.mysongbank.data.repository.SortPreferencesRepository
 import me.index197511.mysongbank.model.Song
 
+@ExperimentalCoroutinesApi
 class SongListViewModel @ViewModelInject constructor(
     private val songRepository: SongRepository,
     private val sortPrefsRepository: SortPreferencesRepository
 ) : ViewModel() {
-    private val _songs: Flow<List<Song>> = songRepository.loadAll().distinctUntilChanged()
+    private val searchChannel = ConflatedBroadcastChannel<String>()
+    private var songs: Flow<List<Song>> = searchChannel.asFlow()
+        .flatMapLatest { search ->
+            songRepository.loadSongsWithQuery(search)
+        }
     private val sortOrder: Flow<SortPreferences> = sortPrefsRepository.sortPreferencesFlow
-    private val _sortedSongs: Flow<List<Song>> = combine(
-        _songs,
+
+    private var _sortedSongs: Flow<List<Song>> = combine(
+        songs,
         sortOrder
     ) { _songs: List<Song>, sortOrder: SortPreferences ->
         return@combine when (sortOrder.sortOrder) {
@@ -55,5 +64,9 @@ class SongListViewModel @ViewModelInject constructor(
                 "KEY" -> sortPrefsRepository.enableSortBy(SortOrder.BY_KEY)
             }
         }
+    }
+
+    fun filterWithQuery(query: String) {
+        searchChannel.offer(query)
     }
 }
