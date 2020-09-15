@@ -1,9 +1,7 @@
 package me.index197511.mysongbank.ui.songlist
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,7 +19,6 @@ import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
-import org.koin.android.viewmodel.ext.android.viewModel
 
 interface OnClickHandler {
     fun onRootClick()
@@ -52,7 +49,7 @@ class SongListFragment : Fragment() {
             showInsertNewSongDialog()
         }
 
-        viewModel.songs.observe(viewLifecycleOwner, Observer {
+        viewModel.allSongs.observe(viewLifecycleOwner, Observer {
             it?.let { updateSongList(it) }
         })
     }
@@ -75,7 +72,6 @@ class SongListFragment : Fragment() {
             }
         }
     }
-
 
     private fun updateSongList(songList: List<Song>) {
         adapter.update(mutableListOf<Group>().apply {

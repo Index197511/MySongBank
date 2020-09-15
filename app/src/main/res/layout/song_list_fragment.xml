@@ -8,6 +8,19 @@
     android:background="@color/primaryDark"
     tools:context=".ui.songlist.SongListFragment">
 
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/floating_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="16dp"
+        app:floatingSearch_searchHint="Search..."
+        app:floatingSearch_suggestionsListAnimDuration="250"
+        app:floatingSearch_showSearchKey="false"
+        app:floatingSearch_leftActionMode="showHamburger"
+        app:floatingSearch_menu="@menu/search"
+        app:floatingSearch_close_search_on_keyboard_dismiss="true"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_song_list"
         android:layout_width="match_parent"
@@ -25,5 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
+

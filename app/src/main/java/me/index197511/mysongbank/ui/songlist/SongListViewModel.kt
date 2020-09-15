@@ -15,7 +15,8 @@ class SongListViewModel @ViewModelInject constructor(
     private val repository: SongRepository
 ) : ViewModel() {
     @ExperimentalCoroutinesApi
-    val songs: LiveData<List<Song>> = repository.loadAll().distinctUntilChanged().asLiveData()
+    val allSongs: LiveData<List<Song>> =
+        repository.loadAll().distinctUntilChanged().asLiveData()
 
     fun removeSong(song: Song) {
         viewModelScope.launch {
