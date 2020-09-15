@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.insert_new_song_dialog.*
 import kotlinx.android.synthetic.main.song_list_item_body.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
@@ -32,6 +33,7 @@ interface OnClickHandler {
 }
 
 @ExperimentalCoroutinesApi
+@FlowPreview
 @AndroidEntryPoint
 class SongListFragment : Fragment() {
 
