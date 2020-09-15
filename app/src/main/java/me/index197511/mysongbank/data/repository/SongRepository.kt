@@ -1,4 +1,4 @@
-package me.index197511.mysongbank.data
+package me.index197511.mysongbank.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
