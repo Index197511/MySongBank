@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -18,6 +19,7 @@ import me.index197511.mysongbank.data.repository.SortPreferencesRepository
 import me.index197511.mysongbank.model.Song
 
 @ExperimentalCoroutinesApi
+@FlowPreview
 class SongListViewModel @ViewModelInject constructor(
     private val songRepository: SongRepository,
     private val sortPrefsRepository: SortPreferencesRepository
@@ -28,7 +30,6 @@ class SongListViewModel @ViewModelInject constructor(
             songRepository.loadSongsWithQuery(search)
         }
     private val sortOrder: Flow<SortPreferences> = sortPrefsRepository.sortPreferencesFlow
-
     private var _sortedSongs: Flow<List<Song>> = combine(
         songs,
         sortOrder
