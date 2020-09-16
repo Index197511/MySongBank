@@ -1,4 +1,4 @@
-package me.index197511.mysongbank.data.datastore
+package me.index197511.mysongbank.data.source.local.datastore
 
 import androidx.datastore.CorruptionException
 import androidx.datastore.Serializer

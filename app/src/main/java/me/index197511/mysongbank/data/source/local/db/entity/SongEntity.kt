@@ -1,4 +1,4 @@
-package me.index197511.mysongbank.db.entity
+package me.index197511.mysongbank.data.source.local.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

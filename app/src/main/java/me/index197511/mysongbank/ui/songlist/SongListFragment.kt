@@ -2,6 +2,7 @@ package me.index197511.mysongbank.ui.songlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -11,20 +12,20 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
-import com.xwray.groupie.ExpandableGroup
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.insert_new_song_dialog.*
 import kotlinx.android.synthetic.main.song_list_item_body.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
+import me.index197511.mysongbank.model.SortOption
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
-import me.index197511.mysongbank.ui.songlist.songlistoption.OnClickListener
-import me.index197511.mysongbank.ui.songlist.songlistoption.SongListOptionBody
-import me.index197511.mysongbank.ui.songlist.songlistoption.SongListOptionHeader
 
 interface OnClickHandler {
     fun onRootClick()
@@ -32,13 +33,16 @@ interface OnClickHandler {
     fun onItemLongClick()
 }
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 @AndroidEntryPoint
 class SongListFragment : Fragment() {
 
     private val viewModel by viewModels<SongListViewModel>()
     private lateinit var binding: SongListFragmentBinding
-    private val songListAdapter = GroupAdapter<GroupieViewHolder>()
-    private val songOptionAdapter = GroupAdapter<GroupieViewHolder>()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
+
+    private lateinit var sortInitialOption: SortOption
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,19 +54,48 @@ class SongListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerViewSongList.adapter = songListAdapter
-        binding.recyclerViewSongListOption.adapter = songOptionAdapter
+        binding.recyclerViewSongList.adapter = adapter
 
         binding.buttonAddNewSong.setOnClickListener {
-            showInsertionNewSongDialog()
+            showInsertNewSongDialog()
         }
-        setSongListOption()
+
         viewModel.sortedSongs.observe(viewLifecycleOwner, Observer {
             it?.let { updateSongList(it) }
         })
+
+        viewModel.sortOrder.observe(viewLifecycleOwner, Observer {
+            sortInitialOption = it
+        })
+
+        setUpSearchView()
+        viewModel.filterWithQuery("")
     }
 
-    private fun showInsertionNewSongDialog() {
+    private fun setUpSearchView() {
+        binding.floatingSearchView.setOnQueryChangeListener { _, newQuery ->
+            viewModel.filterWithQuery(newQuery)
+        }
+        binding.floatingSearchView.setOnMenuItemClickListener { item: MenuItem? ->
+            showSortSettingDialog()
+        }
+    }
+
+    private fun showSortSettingDialog() {
+        context?.let { context ->
+            MaterialDialog(context).show {
+                listItemsSingleChoice(
+                    initialSelection = SortOption.values().indexOf(sortInitialOption),
+                    items = SortOption.values().map { it.toString() }) { _, _, text ->
+                    viewModel.switchSortOption(SortOption.valueOf(text.toString()))
+                }
+                positiveButton(R.string.text_apply)
+                negativeButton(R.string.text_cancel)
+            }
+        }
+    }
+
+    private fun showInsertNewSongDialog() {
         context?.let { context ->
             MaterialDialog(context, BottomSheet()).show {
                 title(R.string.text_dialog_title)
@@ -81,26 +114,9 @@ class SongListFragment : Fragment() {
         }
     }
 
-    private fun setSongListOption() {
-        songOptionAdapter.update(mutableListOf<ExpandableGroup>().apply {
-            add(ExpandableGroup(SongListOptionHeader(), false).apply {
-                add(
-                    SongListOptionBody(
-                        "SORT BY",
-                        listOf("NAME", "SINGER", "KEY", "ID"),
-                        object :
-                            OnClickListener {
-                            override fun onClick(key: String) {
-                                viewModel.switchSortOption(key)
-                            }
-                        })
-                )
-            })
-        })
-    }
 
     private fun updateSongList(songList: List<Song>) {
-        songListAdapter.update(mutableListOf<Group>().apply {
+        adapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
                 val handler = object : OnClickHandler {
                     override fun onRootClick() {
