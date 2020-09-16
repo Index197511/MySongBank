@@ -1,9 +1,9 @@
-package me.index197511.mysongbank.db
+package me.index197511.mysongbank.data.source.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import me.index197511.mysongbank.db.dao.MySongDatabaseDao
-import me.index197511.mysongbank.db.entity.SongEntity
+import me.index197511.mysongbank.data.source.local.db.dao.MySongDatabaseDao
+import me.index197511.mysongbank.data.source.local.db.entity.SongEntity
 
 @Database(entities = [SongEntity::class], version = 1, exportSchema = false)
 abstract class MySongBankDatabase : RoomDatabase() {

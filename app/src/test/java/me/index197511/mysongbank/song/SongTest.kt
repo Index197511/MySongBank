@@ -1,8 +1,8 @@
 package me.index197511.mysongbank.song
 
 import com.google.common.truth.Truth.assertThat
-import me.index197511.mysongbank.db.entity.SongEntity
-import me.index197511.mysongbank.db.entity.toEntity
+import me.index197511.mysongbank.data.source.local.db.entity.SongEntity
+import me.index197511.mysongbank.data.source.local.db.entity.toEntity
 import me.index197511.mysongbank.model.Song
 import org.junit.Test
 

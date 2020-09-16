@@ -1,8 +1,8 @@
-package me.index197511.mysongbank.db.dao
+package me.index197511.mysongbank.data.source.local.db.dao
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import me.index197511.mysongbank.db.entity.SongEntity
+import me.index197511.mysongbank.data.source.local.db.entity.SongEntity
 
 @Dao
 interface MySongDatabaseDao {

@@ -6,7 +6,7 @@ import androidx.datastore.createDataStore
 import kotlinx.coroutines.flow.catch
 import me.index197511.mysongbank.SortOrder
 import me.index197511.mysongbank.SortPreferences
-import me.index197511.mysongbank.data.datastore.SortPreferencesSerializer
+import me.index197511.mysongbank.data.source.local.datastore.SortPreferencesSerializer
 import java.io.IOException
 import javax.inject.Inject
 

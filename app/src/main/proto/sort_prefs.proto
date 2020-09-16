@@ -4,7 +4,7 @@ option java_package = "me.index197511.mysongbank";
 option java_multiple_files = true;
 
 enum SortOrder {
-  BY_ADDITION = 0;
+  BY_ID = 0;
   BY_NAME = 1;
   BY_SINGER = 2;
   BY_KEY = 3;

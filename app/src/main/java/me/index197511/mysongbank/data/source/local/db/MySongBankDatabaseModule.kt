@@ -1,4 +1,4 @@
-package me.index197511.mysongbank.db
+package me.index197511.mysongbank.data.source.local.db
 
 import android.app.Application
 import androidx.room.Room
@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import me.index197511.mysongbank.db.dao.MySongDatabaseDao
+import me.index197511.mysongbank.data.source.local.db.dao.MySongDatabaseDao
 import javax.inject.Singleton
 
 @Module

@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import me.index197511.mysongbank.db.dao.MySongDatabaseDao
-import me.index197511.mysongbank.db.entity.toEntity
+import me.index197511.mysongbank.data.source.local.db.dao.MySongDatabaseDao
+import me.index197511.mysongbank.data.source.local.db.entity.toEntity
 import me.index197511.mysongbank.model.Song
 import javax.inject.Inject
 

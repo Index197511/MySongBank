@@ -24,6 +24,7 @@ import kotlinx.coroutines.FlowPreview
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.model.Song
+import me.index197511.mysongbank.model.SortOption
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
 
 interface OnClickHandler {
@@ -40,6 +41,8 @@ class SongListFragment : Fragment() {
     private val viewModel by viewModels<SongListViewModel>()
     private lateinit var binding: SongListFragmentBinding
     private val adapter = GroupAdapter<GroupieViewHolder>()
+
+    private lateinit var sortInitialOption: SortOption
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +64,10 @@ class SongListFragment : Fragment() {
             it?.let { updateSongList(it) }
         })
 
+        viewModel.sortOrder.observe(viewLifecycleOwner, Observer {
+            sortInitialOption = it
+        })
+
         setUpSearchView()
         viewModel.filterWithQuery("")
     }
@@ -76,10 +83,11 @@ class SongListFragment : Fragment() {
 
     private fun showSortSettingDialog() {
         context?.let { context ->
-            val sortOptions = listOf("ID", "NAME", "SINGER", "KEY")
             MaterialDialog(context).show {
-                listItemsSingleChoice(items = sortOptions) { dialog, index, text ->
-                    viewModel.switchSortOption(sortOptions[index])
+                listItemsSingleChoice(
+                    initialSelection = SortOption.values().indexOf(sortInitialOption),
+                    items = SortOption.values().map { it.toString() }) { _, _, text ->
+                    viewModel.switchSortOption(SortOption.valueOf(text.toString()))
                 }
                 positiveButton(text = "APPLY")
                 negativeButton(text = "CANCEL")
