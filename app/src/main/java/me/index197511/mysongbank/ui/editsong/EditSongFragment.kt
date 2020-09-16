@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.EditSongFragmentBinding
-import me.index197511.mysongbank.model.Song
 
 @AndroidEntryPoint
 class EditSongFragment : Fragment() {

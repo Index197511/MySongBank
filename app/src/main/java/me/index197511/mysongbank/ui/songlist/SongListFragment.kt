@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.song_list_item_body.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import me.index197511.mysongbank.R
+import me.index197511.mysongbank.data.source.local.datastore.SortOption
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
 
@@ -40,7 +41,7 @@ class SongListFragment : Fragment() {
     private lateinit var binding: SongListFragmentBinding
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
-    private lateinit var sortInitialOption: me.index197511.mysongbank.data.source.local.datastore.SortOption
+    private lateinit var sortInitialOption: SortOption
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,12 +84,12 @@ class SongListFragment : Fragment() {
         context?.let { context ->
             MaterialDialog(context).show {
                 listItemsSingleChoice(
-                    initialSelection = me.index197511.mysongbank.data.source.local.datastore.SortOption.values()
+                    initialSelection = SortOption.values()
                         .indexOf(sortInitialOption),
-                    items = me.index197511.mysongbank.data.source.local.datastore.SortOption.values()
+                    items = SortOption.values()
                         .map { it.toString() }) { _, _, text ->
                     viewModel.switchSortOption(
-                        me.index197511.mysongbank.data.source.local.datastore.SortOption.valueOf(
+                        SortOption.valueOf(
                             text.toString()
                         )
                     )
