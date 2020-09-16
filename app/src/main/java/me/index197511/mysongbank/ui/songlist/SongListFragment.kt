@@ -23,8 +23,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import me.index197511.mysongbank.R
 import me.index197511.mysongbank.databinding.SongListFragmentBinding
-import me.index197511.mysongbank.model.Song
-import me.index197511.mysongbank.model.SortOption
 import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
 
 interface OnClickHandler {
@@ -42,7 +40,7 @@ class SongListFragment : Fragment() {
     private lateinit var binding: SongListFragmentBinding
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
-    private lateinit var sortInitialOption: SortOption
+    private lateinit var sortInitialOption: me.index197511.mysongbank.data.source.local.datastore.SortOption
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,9 +83,15 @@ class SongListFragment : Fragment() {
         context?.let { context ->
             MaterialDialog(context).show {
                 listItemsSingleChoice(
-                    initialSelection = SortOption.values().indexOf(sortInitialOption),
-                    items = SortOption.values().map { it.toString() }) { _, _, text ->
-                    viewModel.switchSortOption(SortOption.valueOf(text.toString()))
+                    initialSelection = me.index197511.mysongbank.data.source.local.datastore.SortOption.values()
+                        .indexOf(sortInitialOption),
+                    items = me.index197511.mysongbank.data.source.local.datastore.SortOption.values()
+                        .map { it.toString() }) { _, _, text ->
+                    viewModel.switchSortOption(
+                        me.index197511.mysongbank.data.source.local.datastore.SortOption.valueOf(
+                            text.toString()
+                        )
+                    )
                 }
                 positiveButton(R.string.text_apply)
                 negativeButton(R.string.text_cancel)
@@ -106,7 +110,13 @@ class SongListFragment : Fragment() {
                     val key = it.edit_text_key.text.toString().toIntOrNull() ?: 0
                     val memo = it.edit_text_memo.text.toString()
                     val newSong =
-                        Song(id = 0, name = name, singer = singer, key = key, memo = memo)
+                        me.index197511.mysongbank.model.Song(
+                            id = 0,
+                            name = name,
+                            singer = singer,
+                            key = key,
+                            memo = memo
+                        )
                     viewModel.insertSong(newSong)
                 }
                 negativeButton(R.string.text_cancel)
@@ -115,7 +125,7 @@ class SongListFragment : Fragment() {
     }
 
 
-    private fun updateSongList(songList: List<Song>) {
+    private fun updateSongList(songList: List<me.index197511.mysongbank.model.Song>) {
         adapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
                 val handler = object : OnClickHandler {

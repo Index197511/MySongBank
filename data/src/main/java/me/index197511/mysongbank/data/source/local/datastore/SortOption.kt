@@ -1,4 +1,4 @@
-package me.index197511.mysongbank.model
+package me.index197511.mysongbank.data.source.local.datastore
 
 import me.index197511.mysongbank.SortOrder
 

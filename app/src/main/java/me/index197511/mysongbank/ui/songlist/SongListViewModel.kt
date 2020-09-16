@@ -13,10 +13,10 @@ import me.index197511.mysongbank.SortOrder
 import me.index197511.mysongbank.SortPreferences
 import me.index197511.mysongbank.data.repository.SongRepository
 import me.index197511.mysongbank.data.repository.SortPreferencesRepository
+import me.index197511.mysongbank.data.source.local.datastore.SortOption
 import me.index197511.mysongbank.data.source.local.datastore.toSortOption
+import me.index197511.mysongbank.data.source.local.datastore.toSortPreferences
 import me.index197511.mysongbank.model.Song
-import me.index197511.mysongbank.model.SortOption
-import me.index197511.mysongbank.model.toSortPreferences
 
 @ExperimentalCoroutinesApi
 @FlowPreview

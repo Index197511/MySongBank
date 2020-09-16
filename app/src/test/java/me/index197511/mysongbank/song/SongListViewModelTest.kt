@@ -29,6 +29,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
+@OptIn(kotlinx.coroutines.FlowPreview::class)
+@ExperimentalCoroutinesApi
 class SongListViewModelTest {
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
@@ -59,9 +61,27 @@ class SongListViewModelTest {
     fun `insert new song`() {
         val mockCorrectFlow: Flow<List<Song>> = flow {
             listOf(
-                Song(id = 1, name = "Song1", singer = "Singer1", key = 0, memo = ""),
-                Song(id = 2, name = "Song2", singer = "Singer2", key = 0, memo = ""),
-                Song(id = 3, name = "Song3", singer = "Singer3", key = 0, memo = "")
+                Song(
+                    id = 1,
+                    name = "Song1",
+                    singer = "Singer1",
+                    key = 0,
+                    memo = ""
+                ),
+                Song(
+                    id = 2,
+                    name = "Song2",
+                    singer = "Singer2",
+                    key = 0,
+                    memo = ""
+                ),
+                Song(
+                    id = 3,
+                    name = "Song3",
+                    singer = "Singer3",
+                    key = 0,
+                    memo = ""
+                )
             )
         }
 

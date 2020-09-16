@@ -43,7 +43,13 @@ class EditSongFragment : Fragment() {
                 val key = editTextKey.text.toString().toIntOrNull() ?: 0
                 val memo = editTextMemo.text.toString()
                 val updatedSong =
-                    Song(id = id, name = name, singer = singer, key = key, memo = memo)
+                    me.index197511.mysongbank.model.Song(
+                        id = id,
+                        name = name,
+                        singer = singer,
+                        key = key,
+                        memo = memo
+                    )
                 viewModel.updateSong(updatedSong)
                 findNavController().navigate(R.id.action_editSongFragment_to_songListFragment)
             }

@@ -46,7 +46,7 @@ class SongRepository @Inject constructor(private val songDao: MySongDatabaseDao)
             .conflate()
     }
 
-    override suspend fun update(song: Song) {
+    override suspend fun update(song: me.index197511.mysongbank.model.Song) {
         withContext(Dispatchers.IO) {
             songDao.update(song.toEntity())
         }
