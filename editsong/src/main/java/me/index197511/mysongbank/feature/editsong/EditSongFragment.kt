@@ -15,6 +15,7 @@ import javax.inject.Inject
 class EditSongFragment : Fragment() {
     private val args: EditSongFragmentArgs by navArgs()
     private val viewModel by viewModels<EditSongViewModel>()
+
     @Inject
     lateinit var router: EditSongRouter
     private lateinit var binding: EditSongFragmentBinding
@@ -51,8 +52,8 @@ class EditSongFragment : Fragment() {
                         memo = memo
                     )
                 viewModel.updateSong(updatedSong)
+                router.navToSongListFragment()
             }
-            router.navToSongListFragment()
         }
         super.onActivityCreated(savedInstanceState)
     }
