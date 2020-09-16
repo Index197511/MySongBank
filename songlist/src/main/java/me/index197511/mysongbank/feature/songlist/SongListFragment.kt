@@ -23,6 +23,7 @@ import kotlinx.coroutines.FlowPreview
 import me.index197511.mysongbank.data.source.local.datastore.SortOption
 import me.index197511.mysongbank.feature.songlist.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.feature.songlist.item.SongListItemHeader
+import javax.inject.Inject
 
 interface OnClickHandler {
     fun onRootClick()
@@ -36,6 +37,9 @@ interface OnClickHandler {
 class SongListFragment : Fragment() {
 
     private val viewModel by viewModels<SongListViewModel>()
+
+    @Inject
+    lateinit var router: SongListRouter
     private lateinit var binding: SongListFragmentBinding
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
@@ -145,9 +149,7 @@ class SongListFragment : Fragment() {
                     }
 
                     override fun onEditClick() {
-//                        val action =
-//                            SongListFragmentDirections.actionSongListFragmentToEditSongFragment(song)
-//                        findNavController().navigate(action)
+                        router.navToEditSongFragment(song)
                     }
 
                     override fun onItemLongClick() {

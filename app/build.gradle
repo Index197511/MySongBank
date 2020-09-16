@@ -134,6 +134,7 @@ dependencies {
     implementation project(":model")
     implementation project(":editsong")
     implementation project(":songlist")
+    implementation project(":router")
 }
 
 protobuf {
