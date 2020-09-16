@@ -13,7 +13,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/editsong" />
             <option value="$PROJECT_DIR$/model" />
+            <option value="$PROJECT_DIR$/songlist" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

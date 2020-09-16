@@ -1,3 +1,5 @@
+include ':songlist'
+include ':editsong'
 include ':data'
 include ':model'
 include ':app'

@@ -19,7 +19,7 @@ import me.index197511.mysongbank.SortPreferences
 import me.index197511.mysongbank.data.repository.SongRepository
 import me.index197511.mysongbank.data.repository.SortPreferencesRepository
 import me.index197511.mysongbank.model.Song
-import me.index197511.mysongbank.ui.songlist.SongListViewModel
+import me.index197511.mysongbank.feature.songlist.SongListViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -93,7 +93,11 @@ class SongListViewModelTest {
         }
         coEvery { sortPrefsRepository.sortPreferencesFlow } returns mockSortPrefsFlow
 
-        val viewModel = SongListViewModel(songRepository, sortPrefsRepository)
+        val viewModel =
+            me.index197511.mysongbank.feature.songlist.SongListViewModel(
+                songRepository,
+                sortPrefsRepository
+            )
         viewModel.sortedSongs.observeForever(observer)
 
         runBlocking {

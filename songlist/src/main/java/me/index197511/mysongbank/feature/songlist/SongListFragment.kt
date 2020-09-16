@@ -1,4 +1,4 @@
-package me.index197511.mysongbank.ui.songlist
+package me.index197511.mysongbank.feature.songlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
@@ -21,10 +20,9 @@ import kotlinx.android.synthetic.main.insert_new_song_dialog.*
 import kotlinx.android.synthetic.main.song_list_item_body.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import me.index197511.mysongbank.R
 import me.index197511.mysongbank.data.source.local.datastore.SortOption
-import me.index197511.mysongbank.databinding.SongListFragmentBinding
-import me.index197511.mysongbank.ui.songlist.songlistitem.SongListItemHeader
+import me.index197511.mysongbank.feature.songlist.databinding.SongListFragmentBinding
+import me.index197511.mysongbank.feature.songlist.item.SongListItemHeader
 
 interface OnClickHandler {
     fun onRootClick()
@@ -129,7 +127,8 @@ class SongListFragment : Fragment() {
     private fun updateSongList(songList: List<me.index197511.mysongbank.model.Song>) {
         adapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
-                val handler = object : OnClickHandler {
+                val handler = object :
+                    OnClickHandler {
                     override fun onRootClick() {
                         context?.let {
                             MaterialDialog(it, BottomSheet()).show {
@@ -146,9 +145,9 @@ class SongListFragment : Fragment() {
                     }
 
                     override fun onEditClick() {
-                        val action =
-                            SongListFragmentDirections.actionSongListFragmentToEditSongFragment(song)
-                        findNavController().navigate(action)
+//                        val action =
+//                            SongListFragmentDirections.actionSongListFragmentToEditSongFragment(song)
+//                        findNavController().navigate(action)
                     }
 
                     override fun onItemLongClick() {

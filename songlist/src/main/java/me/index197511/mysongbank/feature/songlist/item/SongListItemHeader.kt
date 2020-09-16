@@ -1,15 +1,14 @@
-package me.index197511.mysongbank.ui.songlist.songlistitem
+package me.index197511.mysongbank.feature.songlist.item
 
 import android.view.View
 import com.xwray.groupie.viewbinding.BindableItem
-import me.index197511.mysongbank.R
-import me.index197511.mysongbank.databinding.SongListItemHeaderBinding
+import me.index197511.mysongbank.feature.songlist.R
+import me.index197511.mysongbank.feature.songlist.databinding.SongListItemHeaderBinding
 import me.index197511.mysongbank.model.Song
-import me.index197511.mysongbank.ui.songlist.OnClickHandler
 
 
 class SongListItemHeader(
-    private val listener: OnClickHandler,
+    private val listener: me.index197511.mysongbank.feature.songlist.OnClickHandler,
     private val song: Song
 ) :
     BindableItem<SongListItemHeaderBinding>() {

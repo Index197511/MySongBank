@@ -1,4 +1,4 @@
-package me.index197511.mysongbank.ui.editsong
+package me.index197511.mysongbank.feature.editsong
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
