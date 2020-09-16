@@ -89,8 +89,8 @@ class SongListFragment : Fragment() {
                     items = SortOption.values().map { it.toString() }) { _, _, text ->
                     viewModel.switchSortOption(SortOption.valueOf(text.toString()))
                 }
-                positiveButton(text = "APPLY")
-                negativeButton(text = "CANCEL")
+                positiveButton(R.string.text_apply)
+                negativeButton(R.string.text_cancel)
             }
         }
     }

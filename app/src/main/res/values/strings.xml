@@ -13,6 +13,7 @@
     <string name="text_add">add</string>
     <string name="text_delete">delete</string>
     <string name="text_cancel">cancel</string>
+    <string name="text_apply">apply</string>
     <string name="option">OPTION</string>
 
     <array name="sort_options">
