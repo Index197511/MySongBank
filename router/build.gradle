@@ -42,8 +42,8 @@ dependencies {
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.ui_ktx
 
-    implementation project(":editsong")
-    implementation project(":songlist")
+    implementation project(":feature:editsong")
+    implementation project(":feature:songlist")
     implementation project(":model")
 
 }

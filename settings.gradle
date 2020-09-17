@@ -1,6 +1,6 @@
 include ':router'
-include ':songlist'
-include ':editsong'
+include ':feature:songlist'
+include ':feature:editsong'
 include ':data'
 include ':model'
 include ':app'

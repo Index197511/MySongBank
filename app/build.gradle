@@ -125,8 +125,8 @@ dependencies {
 
     implementation project(":data")
     implementation project(":model")
-    implementation project(":editsong")
-    implementation project(":songlist")
+    implementation project(":feature:editsong")
+    implementation project(":feature:songlist")
     implementation project(":router")
 }
 
