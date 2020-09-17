@@ -49,86 +49,85 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "androidx.fragment:fragment-ktx:1.2.5"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+
+    implementation deps.kotlin.stdlib
+
+    // androidx
+    implementation deps.androidx.core
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.legacy_support
+    implementation deps.androidx.fragment
+    implementation deps.androidx.lifecycle_extension
+    implementation deps.androidx.lifecycle_viewmodel
+    implementation deps.androidx.lifecycle_livedata
 
     // test
-    implementation "androidx.test:runner:1.3.0"
-    implementation "androidx.test:rules:1.3.0"
-    implementation "androidx.test:core:1.3.0"
-    implementation "junit:junit:4.12"
-    implementation "com.google.truth:truth:1.0.1"
-    implementation "androidx.test.ext:truth:1.3.0"
-    implementation "androidx.test.espresso:espresso-core:3.3.0"
-    implementation "androidx.test.espresso:espresso-contrib:3.3.0"
+    testImplementation deps.test.androidx_test_runner
+    testImplementation deps.test.androidx_test_rules
+    testImplementation deps.test.androidx_test_core
+    testImplementation deps.test.truth
+    testImplementation deps.test.truth_ext
+    testImplementation deps.test.espresso_core
+    testImplementation deps.test.espresso_contrib
 
     // room
-    kapt 'androidx.room:room-compiler:2.2.5'
-    implementation "androidx.room:room-runtime:2.2.5"
-    implementation "androidx.room:room-ktx:2.2.5"
+    kapt deps.room.compiler
+    implementation deps.room.runtime
+    implementation deps.room.ktx
 
-
-    // daggerHilt
-    implementation "com.google.dagger:hilt-android:2.29.1-alpha"
-    implementation "androidx.hilt:hilt-common:1.0.0-alpha02"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
-    kapt "com.google.dagger:hilt-compiler:2.29.1-alpha"
-    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
-    kapt "com.google.dagger:hilt-android-compiler:2.29.1-alpha"
-
-    // koin
-    implementation "org.koin:koin-core:2.1.5"
-    implementation "org.koin:koin-core-ext:2.1.5"
-    implementation "org.koin:koin-android:2.1.5"
-    implementation "org.koin:koin-android-scope:2.1.5"
-    implementation "org.koin:koin-android-viewmodel:2.1.5"
-    implementation "org.koin:koin-android-ext:2.1.5"
+    // dagger_hilt
+    implementation deps.dagger_hilt.android
+    implementation deps.dagger_hilt.common
+    implementation deps.dagger_hilt.viewmodel
+    kapt deps.dagger_hilt.compiler
+    kapt deps.dagger_hilt.androidx_compiler
+    kapt deps.dagger_hilt.android_compiler
 
     // coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4"
+    implementation deps.coroutines.core
 
     // groupie
     // https://github.com/lisawray/groupie/issues/333
     //    implementation "com.xwray:groupie:2.8.0"
     //    implementation "com.xwray:groupie-viewbinding:2.8.0"
     //    implementation "com.xwray:groupie-kotlin-android-extensions:2.8.0"
-    implementation "com.github.lisawray.groupie:groupie:2.8.0"
-    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.8.0"
-    implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:2.8.0"
+    implementation deps.groupie.groupie
+    implementation deps.groupie.viewbinding
+    implementation deps.groupie.android_extension
 
     // navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:2.3.0-alpha05"
-    implementation "android.arch.navigation:navigation-ui-ktx:2.3.0-alpha05"
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
 
     // material-dialogs
-    implementation 'com.afollestad.material-dialogs:core:3.3.0'
-    implementation 'com.afollestad.material-dialogs:input:3.3.0'
-    implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
+    implementation deps.material_dialog.core
+    implementation deps.material_dialog.input
+    implementation deps.material_dialog.bottomsheets
 
-    implementation "com.github.arimorty:floatingsearchview:2.1.1"
+    // floating_search_view
+    implementation deps.floating_search_view.floating_search_view
 
     // proto Datastore
-    implementation "androidx.datastore:datastore-core:1.0.0-alpha01"
-    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+    implementation deps.proto_data_store.core
+    implementation deps.proto_data_store.proto_buf
 
     // material
-    implementation "com.google.android.material:material:1.2.1"
+    implementation deps.material.material
 
     // mockK
-    testImplementation "io.mockk:mockk:1.10.0"
+    testImplementation deps.mockK.mockK
 
     // kotlinx-coroutines-test
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+    testImplementation deps.kotlinx_coroutines_test.kotlinx_coroutines_test
 
-    // for livedata test
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+
+    implementation project(":data")
+    implementation project(":model")
+    implementation project(":feature:editsong")
+    implementation project(":feature:songlist")
+    implementation project(":router")
 }
 
 protobuf {

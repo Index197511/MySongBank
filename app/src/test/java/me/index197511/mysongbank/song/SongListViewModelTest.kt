@@ -19,7 +19,7 @@ import me.index197511.mysongbank.SortPreferences
 import me.index197511.mysongbank.data.repository.SongRepository
 import me.index197511.mysongbank.data.repository.SortPreferencesRepository
 import me.index197511.mysongbank.model.Song
-import me.index197511.mysongbank.ui.songlist.SongListViewModel
+import me.index197511.mysongbank.feature.songlist.SongListViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -29,6 +29,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
+@OptIn(kotlinx.coroutines.FlowPreview::class)
+@ExperimentalCoroutinesApi
 class SongListViewModelTest {
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
@@ -59,9 +61,27 @@ class SongListViewModelTest {
     fun `insert new song`() {
         val mockCorrectFlow: Flow<List<Song>> = flow {
             listOf(
-                Song(id = 1, name = "Song1", singer = "Singer1", key = 0, memo = ""),
-                Song(id = 2, name = "Song2", singer = "Singer2", key = 0, memo = ""),
-                Song(id = 3, name = "Song3", singer = "Singer3", key = 0, memo = "")
+                Song(
+                    id = 1,
+                    name = "Song1",
+                    singer = "Singer1",
+                    key = 0,
+                    memo = ""
+                ),
+                Song(
+                    id = 2,
+                    name = "Song2",
+                    singer = "Singer2",
+                    key = 0,
+                    memo = ""
+                ),
+                Song(
+                    id = 3,
+                    name = "Song3",
+                    singer = "Singer3",
+                    key = 0,
+                    memo = ""
+                )
             )
         }
 
@@ -73,7 +93,11 @@ class SongListViewModelTest {
         }
         coEvery { sortPrefsRepository.sortPreferencesFlow } returns mockSortPrefsFlow
 
-        val viewModel = SongListViewModel(songRepository, sortPrefsRepository)
+        val viewModel =
+            me.index197511.mysongbank.feature.songlist.SongListViewModel(
+                songRepository,
+                sortPrefsRepository
+            )
         viewModel.sortedSongs.observeForever(observer)
 
         runBlocking {

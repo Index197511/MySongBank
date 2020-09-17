@@ -1,0 +1,87 @@
+plugins {
+    id "com.google.protobuf" version "0.8.12"
+}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation deps.kotlin.stdlib
+
+    // androidx
+    implementation deps.androidx.core
+
+    // test
+    testImplementation deps.test.androidx_test_runner
+    testImplementation deps.test.androidx_test_rules
+    testImplementation deps.test.androidx_test_core
+    testImplementation deps.test.truth
+    testImplementation deps.test.truth_ext
+
+    // proto Datastore
+    implementation deps.proto_data_store.core
+    implementation deps.proto_data_store.proto_buf
+
+    // coroutine
+    implementation deps.coroutines.core
+
+    // room
+    kapt deps.room.compiler
+    implementation deps.room.runtime
+    implementation deps.room.ktx
+
+    // daggerHilt
+    implementation deps.dagger_hilt.android
+    implementation deps.dagger_hilt.common
+    kapt deps.dagger_hilt.compiler
+    kapt deps.dagger_hilt.androidx_compiler
+    kapt deps.dagger_hilt.android_compiler
+
+    implementation project(":model")
+}
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.10.0"
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}

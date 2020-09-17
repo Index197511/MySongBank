@@ -1,0 +1,96 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation deps.kotlin.stdlib
+
+    // androidx
+    implementation deps.androidx.core
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.legacy_support
+    implementation deps.androidx.fragment
+    implementation deps.androidx.lifecycle_extension
+    implementation deps.androidx.lifecycle_viewmodel
+    implementation deps.androidx.lifecycle_livedata
+
+    // test
+    testImplementation deps.test.androidx_test_runner
+    testImplementation deps.test.androidx_test_rules
+    testImplementation deps.test.androidx_test_core
+    testImplementation deps.test.truth
+    testImplementation deps.test.truth_ext
+    testImplementation deps.test.espresso_core
+    testImplementation deps.test.espresso_contrib
+
+    // dagger_hilt
+    implementation deps.dagger_hilt.android
+    implementation deps.dagger_hilt.common
+    implementation deps.dagger_hilt.viewmodel
+    kapt deps.dagger_hilt.compiler
+    kapt deps.dagger_hilt.androidx_compiler
+    kapt deps.dagger_hilt.android_compiler
+
+    // coroutine
+    implementation deps.coroutines.core
+
+    // navigation
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
+
+    // material
+    implementation deps.material.material
+
+    // mockK
+    testImplementation deps.mockK.mockK
+
+    // kotlinx-coroutines-test
+    testImplementation deps.kotlinx_coroutines_test.kotlinx_coroutines_test
+
+    implementation project(":data")
+    implementation project(":model")
+}

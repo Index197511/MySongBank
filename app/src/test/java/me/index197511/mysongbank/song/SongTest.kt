@@ -9,7 +9,13 @@ import org.junit.Test
 class SongTest {
     @Test
     fun songToEntity() {
-        val songModel = Song(id = 0, name = "Name", singer = "Singer", key = 10, memo = "Memo")
+        val songModel = Song(
+            id = 0,
+            name = "Name",
+            singer = "Singer",
+            key = 10,
+            memo = "Memo"
+        )
         val songEntity = songModel.toEntity()
         assertThat(songEntity).isInstanceOf(SongEntity::class.java)
         assertThat(songEntity).isEqualTo(
@@ -26,7 +32,13 @@ class SongTest {
     @Test
     fun songToModel() {
         val songEntity =
-            SongEntity(id = 0, name = "Name", singer = "Singer", key = 10, memo = "Memo")
+            SongEntity(
+                id = 0,
+                name = "Name",
+                singer = "Singer",
+                key = 10,
+                memo = "Memo"
+            )
         val songModel = songEntity.toModel()
         assertThat(songModel).isInstanceOf(Song::class.java)
         assertThat(songModel).isEqualTo(

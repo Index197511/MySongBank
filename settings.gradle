@@ -1,2 +1,7 @@
+include ':router'
+include ':feature:songlist'
+include ':feature:editsong'
+include ':data'
+include ':model'
 include ':app'
 rootProject.name = "MySongBank"
