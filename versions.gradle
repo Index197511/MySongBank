@@ -1,0 +1,142 @@
+ext.deps = [:]
+
+def versions = [:]
+// kotlin
+versions.kotlin = "1.4.0"
+
+// androidx
+versions.androidx_core = "1.3.1"
+versions.androidx_appcompat = "1.2.0"
+versions.androidx_constraintlayout = "2.0.1"
+versions.androidx_legacy_support = "1.0.0"
+versions.androidx_fragment = "1.2.5"
+versions.androidx_lifecycle = "2.2.0"
+
+// test
+versions.androidx_test = "1.3.0"
+versions.junit = "4.12"
+versions.truth = "1.0.1"
+versions.truth_ext = "1.3.0"
+versions.espresso = "3.3.0"
+
+// room
+versions.room = "2.2.5"
+
+// dagger hilt
+versions.dagger_hilt = "2.29.1-alpha"
+versions.androidx_dagger_hilt = "1.0.0-alpha02"
+
+// coroutines
+versions.coroutines = '1.3.4'
+
+// groupie
+versions.groupie = "2.8.0"
+ext.versions = versions
+
+// navigation
+versions.navigation = "2.3.0-alpha05"
+
+// material-dialog
+versions.material_dialog = "3.3.0"
+
+// floating_search_view
+versions.floating_search_view = "2.1.1"
+
+// proto data_store
+versions.proto_data_store = "1.0.0-alpha01"
+versions.proto_buf = "3.10.0"
+
+// google.material
+versions.material = "1.2.1"
+
+// mockK
+versions.mockK = "1.10.0"
+
+// kotlinx-coroutines-test
+versions.kotlinx_coroutines_test = "1.2.1"
+
+def deps = [:]
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+deps.kotlin = kotlin
+
+def androidx = [:]
+androidx.core = "androidx.core:core-ktx:$versions.androidx_core"
+androidx.appcompat = "androidx.appcompat:appcompat:$versions.androidx_appcompat"
+androidx.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.androidx_constraintlayout"
+androidx.legacy_support = "androidx.legacy:legacy-support-v4:$versions.androidx_legacy_support"
+androidx.fragment = "androidx.fragment:fragment-ktx:$versions.androidx_fragment"
+androidx.lifecycle_extension = "androidx.lifecycle:lifecycle-extensions:$versions.androidx_lifecycle"
+androidx.lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx_lifecycle"
+androidx.lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidx_lifecycle"
+deps.androidx = androidx
+
+def test = [:]
+test.androidx_test_runner = "androidx.test:runner:$versions.androidx_test"
+test.androidx_test_rules = "androidx.test:rules:$versions.androidx_test"
+test.androidx_test_core = "androidx.test:core:$versions.androidx_test"
+test.truth = "com.google.truth:truth:$versions.truth"
+test.truth_ext = "androidx.test.ext:truth:$versions.truth_ext"
+test.espresso_core = "androidx.test.espresso:espresso-core:$versions.espresso"
+test.espresso_contrib = "androidx.test.espresso:espresso-contrib:$versions.espresso"
+deps.test = test
+
+def room = [:]
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
+deps.room = room
+
+def dagger_hilt = [:]
+dagger_hilt.android = "com.google.dagger:hilt-android:$versions.dagger_hilt"
+dagger_hilt.common = "androidx.hilt:hilt-common:$versions.androidx_dagger_hilt"
+dagger_hilt.viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$versions.androidx_dagger_hilt"
+dagger_hilt.compiler = "com.google.dagger:hilt-compiler:$versions.dagger_hilt"
+dagger_hilt.androidx_compiler = "androidx.hilt:hilt-compiler:$versions.androidx_dagger_hilt"
+dagger_hilt.android_compiler = "com.google.dagger:hilt-android-compiler:$versions.dagger_hilt"
+deps.dagger_hilt = dagger_hilt
+
+def coroutines = [:]
+coroutines.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+deps.coroutines = coroutines
+
+def groupie = [:]
+groupie.groupie = "com.github.lisawray.groupie:groupie:$versions.groupie"
+groupie.viewbinding = "com.github.lisawray.groupie:groupie-viewbinding:$versions.groupie"
+groupie.android_extension = "com.github.lisawray.groupie:groupie-kotlin-android-extensions:$versions.groupie"
+deps.groupie = groupie
+
+def navigation = [:]
+navigation.fragment_ktx = "android.arch.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui_ktx = "android.arch.navigation:navigation-ui-ktx:$versions.navigation"
+deps.navigation = navigation
+
+def material_dialog = [:]
+material_dialog.core = "com.afollestad.material-dialogs:core:$versions.material_dialog"
+material_dialog.input = "com.afollestad.material-dialogs:input:$versions.material_dialog"
+material_dialog.bottomsheets = "com.afollestad.material-dialogs:bottomsheets:$versions.material_dialog"
+deps.material_dialog = material_dialog
+
+def floating_search_view = [:]
+floating_search_view.floating_search_view = "com.github.arimorty:floatingsearchview:$versions.floating_search_view"
+deps.floating_search_view = floating_search_view
+
+def proto_data_store = [:]
+proto_data_store.core = "androidx.datastore:datastore-core:$versions.proto_data_store"
+proto_data_store.proto_buf = "com.google.protobuf:protobuf-javalite:$versions.proto_buf"
+deps.proto_data_store = proto_data_store
+
+def material = [:]
+material.material = "com.google.android.material:material:$versions.material"
+deps.material = material
+
+def mockK = [:]
+mockK.mockK = "io.mockk:mockk:$versions.mockK"
+deps.mockK = mockK
+
+def kotlinx_coroutines_test = [:]
+kotlinx_coroutines_test.kotlinx_coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx_coroutines_test"
+deps.kotlinx_coroutines_test = kotlinx_coroutines_test
+
+ext.deps = deps

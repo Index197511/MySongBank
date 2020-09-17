@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MySongBank</string>
-    <string name="text_detail_dialog_title">Song\'s Detail</string>
     <string name="text_edit_button">edit</string>
     <string name="text_song_name">Song\'s Name</string>
     <string name="text_singer">Singer</string>
@@ -14,12 +13,5 @@
     <string name="text_delete">delete</string>
     <string name="text_cancel">cancel</string>
     <string name="text_apply">apply</string>
-    <string name="option">OPTION</string>
 
-    <array name="sort_options">
-        <item>ID</item>
-        <item>NAME</item>
-        <item>SINGER</item>
-        <item>KEY</item>
-    </array>
 </resources>
