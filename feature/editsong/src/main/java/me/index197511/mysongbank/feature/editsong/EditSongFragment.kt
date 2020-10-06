@@ -28,7 +28,7 @@ class EditSongFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             editTextName.setText(args.song.name)
             editTextSinger.setText(args.song.singer)
@@ -55,7 +55,6 @@ class EditSongFragment : Fragment() {
                 router.navToSongListFragment()
             }
         }
-        super.onActivityCreated(savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
     }
-
 }
