@@ -23,6 +23,7 @@ import kotlinx.coroutines.FlowPreview
 import me.index197511.mysongbank.data.source.local.datastore.SortOption
 import me.index197511.mysongbank.feature.songlist.databinding.SongListFragmentBinding
 import me.index197511.mysongbank.feature.songlist.item.SongListItemHeader
+import me.index197511.mysongbank.model.Song
 import javax.inject.Inject
 
 interface OnClickHandler {
@@ -131,46 +132,48 @@ class SongListFragment : Fragment() {
     private fun updateSongList(songList: List<me.index197511.mysongbank.model.Song>) {
         adapter.update(mutableListOf<Group>().apply {
             songList.forEach { song ->
-                val handler = object :
-                    OnClickHandler {
-                    override fun onRootClick() {
-                        context?.let {
-                            MaterialDialog(it, BottomSheet()).show {
-                                title(R.string.text_dialog_title)
-                                customView(R.layout.song_list_item_body)
-                                this.text_view_name.text = song.name
-                                this.text_view_singer.text = song.singer
-                                this.text_view_key.text =
-                                    if (song.key <= 0) "${song.key}" else "+${song.key}"
-                                this.text_view_memo.text = song.memo
-                                negativeButton(R.string.text_close)
-                            }
-                        }
-                    }
-
-                    override fun onEditClick() {
-                        router.navToEditSongFragment(song)
-                    }
-
-                    override fun onItemLongClick() {
-                        context?.let {
-                            MaterialDialog(it).show {
-                                title(R.string.text_delete_dialog_message)
-                                customView(R.layout.delete_song_dialog)
-                                this.text_view_name.text = song.name
-                                this.text_view_singer.text = song.singer
-
-                                positiveButton(R.string.text_delete) {
-                                    viewModel.removeSong(song)
-                                }
-                                negativeButton(R.string.text_cancel)
-                            }
-                        }
-                    }
-                }
-                add(SongListItemHeader(handler, song))
+                add(SongListItemHeader(generateClickHandlerForListItem(song), song))
             }
         })
+    }
+
+    private fun generateClickHandlerForListItem(song: Song): OnClickHandler {
+        return object : OnClickHandler {
+            override fun onRootClick() {
+                context?.let {
+                    MaterialDialog(it, BottomSheet()).show {
+                        title(R.string.text_dialog_title)
+                        customView(R.layout.song_list_item_body)
+                        this.text_view_name.text = song.name
+                        this.text_view_singer.text = song.singer
+                        this.text_view_key.text =
+                            if (song.key <= 0) "${song.key}" else "+${song.key}"
+                        this.text_view_memo.text = song.memo
+                        negativeButton(R.string.text_close)
+                    }
+                }
+            }
+
+            override fun onEditClick() {
+                router.navToEditSongFragment(song)
+            }
+
+            override fun onItemLongClick() {
+                context?.let {
+                    MaterialDialog(it).show {
+                        title(R.string.text_delete_dialog_message)
+                        customView(R.layout.delete_song_dialog)
+                        this.text_view_name.text = song.name
+                        this.text_view_singer.text = song.singer
+
+                        positiveButton(R.string.text_delete) {
+                            viewModel.removeSong(song)
+                        }
+                        negativeButton(R.string.text_cancel)
+                    }
+                }
+            }
+        }
     }
 
 }

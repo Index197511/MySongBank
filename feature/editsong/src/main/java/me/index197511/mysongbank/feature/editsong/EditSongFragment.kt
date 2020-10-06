@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import me.index197511.mysongbank.common_feature.closeKeyboard
 import me.index197511.mysongbank.feature.editsong.databinding.EditSongFragmentBinding
 import javax.inject.Inject
 
@@ -28,7 +29,7 @@ class EditSongFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             editTextName.setText(args.song.name)
             editTextSinger.setText(args.song.singer)
@@ -52,10 +53,10 @@ class EditSongFragment : Fragment() {
                         memo = memo
                     )
                 viewModel.updateSong(updatedSong)
+                closeKeyboard()
                 router.navToSongListFragment()
             }
         }
-        super.onActivityCreated(savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
     }
-
 }
