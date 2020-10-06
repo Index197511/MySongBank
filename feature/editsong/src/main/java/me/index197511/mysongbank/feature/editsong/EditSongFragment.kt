@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import me.index197511.mysongbank.common_feature.closeKeyboard
 import me.index197511.mysongbank.feature.editsong.databinding.EditSongFragmentBinding
 import javax.inject.Inject
 
@@ -52,6 +53,7 @@ class EditSongFragment : Fragment() {
                         memo = memo
                     )
                 viewModel.updateSong(updatedSong)
+                closeKeyboard()
                 router.navToSongListFragment()
             }
         }

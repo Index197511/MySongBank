@@ -9,13 +9,13 @@ apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "me.index197511.mysongbank"
         minSdkVersion 26
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -120,8 +120,6 @@ dependencies {
 
     // kotlinx-coroutines-test
     testImplementation deps.kotlinx_coroutines_test.kotlinx_coroutines_test
-
-
 
     implementation project(":data")
     implementation project(":model")

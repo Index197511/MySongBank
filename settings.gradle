@@ -1,3 +1,4 @@
+include ':common_feature'
 include ':router'
 include ':feature:songlist'
 include ':feature:editsong'
