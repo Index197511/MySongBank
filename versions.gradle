@@ -55,6 +55,9 @@ versions.mockK = "1.10.0"
 // kotlinx-coroutines-test
 versions.kotlinx_coroutines_test = "1.2.1"
 
+// kotest
+versions.kotest = "4.4.3"
+
 def deps = [:]
 
 def kotlin = [:]
@@ -138,5 +141,10 @@ deps.mockK = mockK
 def kotlinx_coroutines_test = [:]
 kotlinx_coroutines_test.kotlinx_coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx_coroutines_test"
 deps.kotlinx_coroutines_test = kotlinx_coroutines_test
+
+def kotest = [:]
+kotest.runner = "io.kotest:kotest-runner-junit5:$versions.kotest"
+kotest.assertions = "io.kotest:kotest-assertions-core:$versions.kotest"
+deps.kotest = kotest
 
 ext.deps = deps

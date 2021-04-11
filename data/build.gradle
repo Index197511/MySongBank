@@ -49,6 +49,7 @@ dependencies {
     testImplementation deps.test.androidx_test_core
     testImplementation deps.test.truth
     testImplementation deps.test.truth_ext
+    testImplementation deps.kotlinx_coroutines_test.kotlinx_coroutines_test
 
     // proto Datastore
     implementation deps.proto_data_store.core
@@ -68,6 +69,13 @@ dependencies {
     kapt deps.dagger_hilt.compiler
     kapt deps.dagger_hilt.androidx_compiler
     kapt deps.dagger_hilt.android_compiler
+
+    // mockk
+    testImplementation deps.mockK.mockK
+
+    // kotest
+    testImplementation deps.kotest.runner
+    testImplementation deps.kotest.assertions
 
     implementation project(":model")
 }
